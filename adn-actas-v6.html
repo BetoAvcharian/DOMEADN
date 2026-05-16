@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#000000"/>
+<title>ADN Developers · Actas de posesión</title>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/iconfont/tabler-icons.min.css"/>
+<style>
+:root {
+  --bg: #000000;
+  --bg-2: #0d0d0d;
+  --bg-3: #161616;
+  --bg-4: #1f1f1f;
+  --border: #1f1f1f;
+  --border-2: #2a2a2a;
+  --border-3: #3a3a3a;
+  --text: #ffffff;
+  --text-2: #b8b8b8;
+  --text-3: #757575;
+  --text-4: #4a4a4a;
+  --accent: #ffffff;
+  --green: #6b9a4a;
+  --green-bg: #1a2811;
+  --green-text: #a7d077;
+  --amber: #b89856;
+  --amber-bg: #261f0e;
+  --amber-text: #d4b370;
+  --red: #a04040;
+  --red-bg: #261010;
+  --red-text: #d87878;
+  --gray-state: #4a4a4a;
+  --gray-state-bg: #1a1a1a;
+  --gray-state-text: #8a8a8a;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Playfair Display", "Times New Roman", serif;
+}
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overscroll-behavior-y: contain;
+}
+input, textarea, select, button { font-family: inherit; }
+
+.adn-shell {
+  background: var(--bg);
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.adn-header {
+  padding: 14px 16px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.adn-logo-img { height: 28px; width: auto; display: block; }
+.adn-stepper { display: flex; gap: 4px; }
+.adn-stepper-dot { width: 22px; height: 3px; border-radius: 2px; background: var(--border-2); transition: background 0.3s; }
+.adn-stepper-dot.active { background: var(--text); }
+.adn-stepper-dot.done { background: var(--text-3); }
+
+.adn-body { padding: 18px 16px 120px; flex: 1; }
+.adn-h1 { font-size: 26px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.5px; line-height: 1.2; }
+.adn-h2 { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+.adn-sub { font-size: 13px; color: var(--text-2); margin: 0 0 18px; line-height: 1.5; }
+
+.adn-section {
+  background: var(--bg-2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.adn-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+.adn-field { margin-bottom: 12px; }
+.adn-field:last-child { margin-bottom: 0; }
+.adn-label {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+}
+.adn-label .req { color: var(--text); margin-left: 2px; }
+
+.adn-input, .adn-select, .adn-textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 0.5px solid var(--border-2);
+  border-radius: var(--radius-md);
+  padding: 13px 12px;
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+}
+.adn-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b8b8b8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+.adn-input:focus, .adn-select:focus, .adn-textarea:focus { border-color: var(--text); }
+.adn-input::placeholder, .adn-textarea::placeholder { color: var(--text-4); }
+.adn-input[readonly] { color: var(--text-2); background: var(--bg-2); }
+.adn-textarea { resize: vertical; min-height: 80px; font-size: 15px; line-height: 1.5; }
+
+.adn-role-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg-3);
+  border: 0.5px solid var(--border-2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--text);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.adn-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 0.5px solid var(--border-2);
+  background: transparent;
+  color: var(--text);
+  min-height: 52px;
+  font-family: inherit;
+}
+.adn-btn:hover { border-color: var(--text); }
+.adn-btn:active { transform: scale(0.98); }
+.adn-btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.adn-btn-primary:hover { background: #f0f0f0; border-color: #f0f0f0; }
+.adn-btn-primary:disabled { background: var(--border-2); color: var(--text-3); border-color: var(--border-2); cursor: not-allowed; }
+.adn-btn-ghost { background: transparent; border-color: var(--border-2); color: var(--text-2); }
+.adn-btn-icon { padding: 10px 12px; font-size: 13px; }
+
+.adn-nav {
+  position: sticky;
+  bottom: 0;
+  left: 0; right: 0;
+  background: linear-gradient(to top, var(--bg) 70%, transparent);
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 10px;
+  margin: 0 -16px -120px;
+  border-top: 0.5px solid var(--border);
+  z-index: 5;
+}
+.adn-nav .adn-btn { flex: 1; }
+.adn-nav .adn-btn-ghost { flex: 0.7; }
+
+.adn-card-edificio {
+  background: var(--bg-2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  gap: 10px;
+}
+.adn-card-edificio:hover { border-color: var(--border-3); }
+.adn-card-edificio.selected { border-color: var(--text); background: var(--bg-3); }
+.adn-card-edificio-info { flex: 1; min-width: 0; }
+.adn-card-edificio-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.adn-card-edificio-name .dome-pre {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 11px;
+  color: var(--text-3);
+  margin-right: 4px;
+  border: 0.5px solid var(--border-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.adn-card-edificio-name .lock-icon {
+  color: var(--text-3);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.adn-card-edificio-addr { font-size: 12px; color: var(--text-2); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.adn-card-edificio-addr i { font-size: 11px; margin-right: 4px; }
+
+.adn-add-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--text); font-size: 13px;
+  cursor: pointer;
+  padding: 8px 0;
+  margin-top: 4px;
+  font-weight: 500;
+}
+.adn-add-link:hover { opacity: 0.75; }
+
+.adn-checklist-item {
+  background: var(--bg-2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 10px;
+  transition: border-color 0.15s;
+  border-left-width: 3px;
+}
+.adn-checklist-item.s-conforme { border-left-color: var(--green); }
+.adn-checklist-item.s-observacion { border-left-color: var(--amber); }
+.adn-checklist-item.s-pendiente { border-left-color: var(--border-2); }
+.adn-checklist-text { font-size: 14px; color: var(--text); margin: 0 0 11px; line-height: 1.45; }
+.adn-checklist-num { color: var(--text-3); font-weight: 700; margin-right: 6px; font-variant-numeric: tabular-nums; }
+.adn-checklist-states {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.adn-state-btn {
+  padding: 11px 4px;
+  border-radius: var(--radius-md);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 0.5px solid var(--border-2);
+  background: transparent;
+  color: var(--text-3);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 42px;
+  font-family: inherit;
+}
+.adn-state-btn i { font-size: 14px; }
+.adn-state-btn.active-conforme { background: var(--green-bg); border-color: var(--green); color: var(--green-text); }
+.adn-state-btn.active-observacion { background: var(--amber-bg); border-color: var(--amber); color: var(--amber-text); }
+
+.adn-detail-box {
+  background: var(--bg);
+  border: 0.5px dashed var(--border-2);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.adn-photo-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.adn-photo-wrap { position: relative; }
+.adn-photo-thumb {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 0.5px solid var(--border-2);
+  cursor: pointer;
+  display: block;
+}
+.adn-photo-del {
+  position: absolute; top: -6px; right: -6px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  border: 2px solid var(--bg-2);
+  cursor: pointer;
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.adn-photo-add {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-md);
+  border: 0.5px dashed var(--border-3);
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-direction: column;
+  gap: 2px;
+}
+.adn-photo-add span { font-size: 9px; letter-spacing: 0.5px; font-weight: 500; }
+.adn-photo-add:hover { border-color: var(--text); color: var(--text); }
+.adn-photo-add input { display: none; }
+
+.adn-signature-box {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  height: 160px;
+  width: 100%;
+  touch-action: none;
+  display: block;
+}
+.adn-sign-actions {
+  display: flex; gap: 8px;
+  margin-top: 6px; margin-bottom: 14px;
+}
+.adn-sign-actions button {
+  flex: 1;
+  font-size: 12px;
+  padding: 8px;
+  background: transparent;
+  border: 0.5px solid var(--border-2);
+  color: var(--text-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: inherit;
+}
+.adn-sign-label {
+  font-size: 12px;
+  color: var(--text-2);
+  margin: 12px 0 6px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-weight: 500;
+}
+.adn-sign-label .badge-ok { color: var(--green-text); font-size: 11px; }
+.adn-sign-label .badge-pend { color: var(--text-3); font-size: 11px; }
+
+.adn-modal-back {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  animation: fade-in 0.15s ease;
+}
+.adn-modal {
+  background: var(--bg-2);
+  border: 0.5px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  animation: scale-in 0.18s ease;
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+.adn-toast {
+  position: fixed;
+  top: calc(72px + env(safe-area-inset-top));
+  left: 16px; right: 16px;
+  max-width: 488px;
+  margin: 0 auto;
+  background: var(--bg-3);
+  border: 0.5px solid var(--text);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 13px;
+  z-index: 50;
+  animation: toast-in 0.25s ease;
+  display: flex; align-items: center; gap: 8px;
+}
+.adn-toast i { color: var(--text); }
+@keyframes toast-in { from { transform: translateY(-12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.adn-empty {
+  text-align: center;
+  padding: 30px 16px;
+  color: var(--text-3);
+  font-size: 13px;
+}
+.adn-empty i { font-size: 36px; display: block; margin-bottom: 10px; color: var(--border-3); }
+
+/* Acta documento */
+.adn-acta-doc {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-radius: var(--radius-md);
+  padding: 26px 22px;
+  margin: 6px 0 14px;
+}
+.adn-acta-doc .acta-h {
+  text-align: center;
+  border-bottom: 1px solid #0a0a0a;
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+}
+.adn-acta-doc .acta-adn-tag {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #0a0a0a;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.adn-acta-doc .acta-adn-tag .sub { font-weight: 400; letter-spacing: 2px; }
+.adn-acta-doc .acta-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 4px 0 0;
+  color: #0a0a0a;
+}
+.adn-acta-doc h4 {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #555;
+  margin: 18px 0 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.adn-acta-doc .acta-kv {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 5px 0;
+  border-bottom: 0.5px dashed #d4d4d4;
+  gap: 8px;
+}
+.adn-acta-doc .acta-kv span:first-child { color: #757575; flex-shrink: 0; }
+.adn-acta-doc .acta-kv span:last-child { text-align: right; word-break: break-word; font-weight: 500; }
+.adn-acta-doc .acta-decl {
+  background: #f5f5f5;
+  border-left: 3px solid #0a0a0a;
+  padding: 14px;
+  font-size: 11px;
+  margin: 18px 0 12px;
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.adn-acta-doc .acta-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.adn-acta-doc .acta-stat {
+  border-radius: 4px;
+  padding: 10px 2px;
+  text-align: center;
+  border: 0.5px solid #e0e0e0;
+}
+.adn-acta-doc .acta-stat-num { font-size: 20px; font-weight: 700; font-family: var(--font-serif); }
+.adn-acta-doc .acta-stat-label { font-size: 8px; letter-spacing: 1px; font-weight: 700; margin-top: 2px; }
+.adn-acta-doc .acta-stat.conf { background: #ebf2e1; border-color: #c4d8a3; }
+.adn-acta-doc .acta-stat.conf .acta-stat-num, .adn-acta-doc .acta-stat.conf .acta-stat-label { color: #4a7a2a; }
+.adn-acta-doc .acta-stat.obs { background: #f5ecd8; border-color: #d4c489; }
+.adn-acta-doc .acta-stat.obs .acta-stat-num, .adn-acta-doc .acta-stat.obs .acta-stat-label { color: #8a7838; }
+.adn-acta-doc .acta-stat.nc { background: #f2dede; border-color: #d8a3a3; }
+.adn-acta-doc .acta-stat.nc .acta-stat-num, .adn-acta-doc .acta-stat.nc .acta-stat-label { color: #9a3838; }
+.adn-acta-doc .acta-stat.se { background: #ededed; border-color: #c8c8c8; }
+.adn-acta-doc .acta-stat.se .acta-stat-num, .adn-acta-doc .acta-stat.se .acta-stat-label { color: #666; }
+.adn-acta-doc .acta-item {
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 0.5px dashed #d4d4d4;
+}
+.adn-acta-doc .acta-item-text { color: #0a0a0a; margin-bottom: 3px; line-height: 1.4; }
+.adn-acta-doc .acta-item-state { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; }
+.adn-acta-doc .acta-item-obs { font-size: 11px; color: #555; margin-top: 4px; font-style: italic; }
+.adn-acta-doc .acta-foot {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 0.5px solid #d4d4d4;
+}
+.adn-acta-doc .acta-foot-dome {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 6px;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+.adn-acta-doc .acta-foot-sub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #888;
+  margin-top: 4px;
+}
+.s-conforme-c { color: #4a7a2a; }
+.s-observacion-c { color: #8a7838; }
+.s-sin-evaluar-c { color: #888; }
+
+.adn-export-grid { display: grid; gap: 10px; }
+
+.adn-progress-bar {
+  height: 4px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.adn-progress-bar-fill {
+  height: 100%;
+  background: var(--text);
+  transition: width 0.3s;
+}
+
+.adn-photo-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  padding: 16px;
+}
+.adn-photo-modal img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: var(--radius-md);
+}
+.adn-photo-modal-close {
+  position: fixed;
+  top: calc(16px + env(safe-area-inset-top));
+  right: 16px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--bg-3);
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.adn-status {
+  font-size: 11px;
+  color: var(--text-3);
+  padding: 10px 12px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  text-align: center;
+  background: var(--bg-2);
+  border-top: 0.5px solid var(--border);
+  letter-spacing: 0.5px;
+}
+.adn-status .dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.adn-status .dome-mark {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-2);
+}
+
+.adn-success-circle {
+  width: 76px; height: 76px;
+  background: var(--green-bg);
+  border: 0.5px solid var(--green);
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.adn-success-circle i { font-size: 38px; color: var(--green-text); }
+
+.adn-home-hero {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 32px;
+}
+.adn-home-hero .dome-tag {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 6px;
+  font-weight: 700;
+  color: var(--text-3);
+  margin-bottom: 18px;
+}
+
+.adn-body { animation: step-in 0.25s ease; }
+@keyframes step-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+html { scroll-behavior: smooth; }
+
+/* ===== Splash screen ===== */
+.adn-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(40px + env(safe-area-inset-top)) 24px calc(32px + env(safe-area-inset-bottom));
+  background: #000000;
+  animation: splash-in 0.4s ease;
+}
+.adn-splash-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+.adn-splash-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+  width: 100%;
+}
+.adn-splash-logo-combined {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  display: block;
+}
+.adn-splash-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+.adn-splash-sub {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.adn-splash-btn {
+  width: 100%;
+  max-width: 360px;
+  padding: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #000;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.adn-splash-btn:active { transform: scale(0.98); background: #f0f0f0; }
+@keyframes splash-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes splash-out { from { opacity: 1; } to { opacity: 0; transform: scale(1.02); } }
+.adn-splash.closing { animation: splash-out 0.3s ease forwards; }
+</style>
+</head>
+<body>
+<div id="adn-app-root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.7/signature_pad.umd.min.js"></script>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== Logos embebidos en base64 =====
+  const LOGO_ADN = "data:image/png;base64,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";
+  const LOGO_DOME = "data:image/png;base64,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";
+
+  const DOME_SPLASH = "data:image/png;base64,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";
+
+  const CHECKLIST_DEFAULT = [
+    "Puerta de acceso: terminaciones, apertura y cerradura biométrica",
+    "Manuales y folletos de cerradura biométrica",
+    "Puerta de servicio: terminaciones, apertura y herraje",
+    "Puertas interiores: terminaciones, apertura, herrajes, bisagras y picaporte",
+    "Carpinterías exteriores: terminaciones, apertura, herrajes y sellados",
+    "Baranda balcón: terminación y herrajes",
+    "Divisor balcón: terminación y herrajes",
+    "Zócalos",
+    "Mesadas de cocina: alzadas y laterales",
+    "Mobiliario de cocina: herrajes y aberturas, cierres y terminaciones",
+    "Mobiliario de cocina: terminaciones y módulos operativos",
+    "Anafe: operativo y accesorios",
+    "Anafe: manuales y garantías",
+    "Horno: operativo y accesorios",
+    "Horno: manuales y garantías",
+    "Espejo de baño",
+    "Espejo de toilette",
+    "Mesada de baño/toilette",
+    "Extractor de baño/toilette: operativo",
+    "Accesorios de baños: toalleros, portarrollos y perchas",
+    "Artefactos de baños: operativos",
+    "Instalación sanitaria: operativo, AF/AC",
+    "Preinstalación del Aire Acondicionado",
+    "Instalación eléctrica: tablero rotulado, timbre, portero visor",
+    "Solados",
+    "Pintura general",
+    "Limpieza general",
+    "Cantidad de llaves",
+    "Cochera: pintura y demarcación, iluminación",
+    "Controles de portones"
+  ];
+
+  // Edificios precargados FIJOS (no se pueden borrar)
+  const EDIFICIOS_SEED = [
+    { id: "seed-1", nombre: "DOME Torre Arcos", direccion: "Arcos 1833", locked: true, isDome: true },
+    { id: "seed-2", nombre: "DOME Torre Beruti", direccion: "Beruti 4540", locked: true, isDome: true },
+    { id: "seed-3", nombre: "DOME Cabello Apartments", direccion: "Cabello y Lafinur", locked: true, isDome: true },
+    { id: "seed-4", nombre: "DOME Suites and Residences", direccion: "Paraguay", locked: true, isDome: true },
+    { id: "seed-5", nombre: "DOME Cabello Residences", direccion: "Cabello y República Árabe de Siria", locked: true, isDome: true },
+    { id: "seed-6", nombre: "DOME Cerviño Boulevard", direccion: "Bv. Cerviño 3941", locked: true, isDome: true }
+  ];
+
+  const STORAGE_EDIFICIOS = "adn_edificios_v2";
+  const STORAGE_DRAFT = "adn_entrega_draft_v2";
+
+  function sGet(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
+  function sSet(k, v) { try { localStorage.setItem(k, v); } catch(e) { console.warn("Storage:", e); } }
+  function sDel(k) { try { localStorage.removeItem(k); } catch(e) {} }
+
+  let state = {
+    step: 0,
+    splashVisible: true,
+    edificiosCustom: [],
+    selectedEdificioId: null,
+    entrega: {
+      unidad: "", piso: "", numero: "",
+      fechaHora: "",
+      entrega: { nombre: "", dni: "", rol: "Comercial ADN" },
+      recibe: { nombre: "", dni: "", celular: "", email: "" },
+      checklist: [],
+      notas: { texto: "", fotos: [] },
+      firmaEntrega: null,
+      firmaRecibe: null
+    },
+    toast: null,
+    photoModal: null,
+    confirmModal: null
+  };
+
+  function getAllEdificios() {
+    return EDIFICIOS_SEED.concat(state.edificiosCustom);
+  }
+
+  function initChecklist() {
+    state.entrega.checklist = CHECKLIST_DEFAULT.map((t, i) => ({
+      id: i + 1, text: t, estado: null, observacion: "", fotos: []
+    }));
+  }
+
+  function loadInitial() {
+    const edRaw = sGet(STORAGE_EDIFICIOS);
+    if (edRaw) {
+      try { state.edificiosCustom = JSON.parse(edRaw); } catch(e) { state.edificiosCustom = []; }
+    }
+    const draftRaw = sGet(STORAGE_DRAFT);
+    if (draftRaw) {
+      try {
+        const d = JSON.parse(draftRaw);
+        if (d && d.entrega && d.step > 0) {
+          state.entrega = d.entrega;
+          state.selectedEdificioId = d.selectedEdificioId;
+          state.step = d.step;
+          setTimeout(() => showToast("Sesión recuperada"), 300);
+        }
+      } catch(e) {}
+    }
+    if (state.entrega.checklist.length === 0) initChecklist();
+    render();
+  }
+
+  function saveEdificios() { sSet(STORAGE_EDIFICIOS, JSON.stringify(state.edificiosCustom)); }
+  function saveDraft() {
+    if (state.step === 0 || state.step === 4) { sDel(STORAGE_DRAFT); return; }
+    try {
+      sSet(STORAGE_DRAFT, JSON.stringify({
+        step: state.step,
+        selectedEdificioId: state.selectedEdificioId,
+        entrega: state.entrega
+      }));
+    } catch(e) { console.warn(e); }
+  }
+  function clearDraft() { sDel(STORAGE_DRAFT); }
+
+  function showToast(msg, ms = 2400) {
+    state.toast = msg;
+    renderToast();
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => { state.toast = null; renderToast(); }, ms);
+  }
+  function renderToast() {
+    let el = document.getElementById('adn-toast-el');
+    if (el) el.remove();
+    if (state.toast) {
+      el = document.createElement('div');
+      el.id = 'adn-toast-el';
+      el.className = 'adn-toast';
+      el.innerHTML = '<i class="ti ti-info-circle"></i>' + escapeHtml(state.toast);
+      document.body.appendChild(el);
+    }
+  }
+
+  function escapeHtml(s) {
+    if (s == null) return "";
+    return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+
+  function getEdificio() {
+    return getAllEdificios().find(e => String(e.id) === String(state.selectedEdificioId));
+  }
+
+  function fmtFechaHora(iso) {
+    if (!iso) return "—";
+    try {
+      const d = new Date(iso);
+      return d.toLocaleString("es-AR", {
+        day: "2-digit", month: "2-digit", year: "numeric",
+        hour: "2-digit", minute: "2-digit"
+      });
+    } catch(e) { return iso; }
+  }
+
+  function getEstadoSummary() {
+    const cl = state.entrega.checklist;
+    return {
+      conf: cl.filter(i => i.estado === 'conforme').length,
+      obs: cl.filter(i => i.estado === 'observacion').length,
+      sinEval: cl.filter(i => !i.estado).length
+    };
+  }
+
+  // ===== Splash screen =====
+  function renderSplash() {
+    return '<div class="adn-splash" id="adn-splash">'
+      + '<div class="adn-splash-content">'
+        + '<div class="adn-splash-top">'
+          + '<img src="' + DOME_SPLASH + '" alt="DOME · ADN Developers" class="adn-splash-logo-combined"/>'
+        + '</div>'
+        + '<div class="adn-splash-bottom">'
+          + '<div class="adn-splash-sub">Actas de posesión</div>'
+          + '<button class="adn-splash-btn" id="splash-enter">Ingresar</button>'
+        + '</div>'
+      + '</div>'
+    + '</div>';
+  }
+
+  function attachSplashHandlers() {
+    const btn = document.getElementById('splash-enter');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const splash = document.getElementById('adn-splash');
+      if (splash) splash.classList.add('closing');
+      setTimeout(() => {
+        state.splashVisible = false;
+        render();
+      }, 280);
+    });
+  }
+
+  // ===== Render =====
+  function render() {
+    const root = document.getElementById("adn-app-root");
+
+    // Splash siempre on top mientras esté visible
+    if (state.splashVisible) {
+      root.innerHTML = renderSplash();
+      attachSplashHandlers();
+      return;
+    }
+
+    const stepDots = [0,1,2,3,4].map(i => {
+      if (state.step === 0) return '<div class="adn-stepper-dot"></div>';
+      const cls = i === state.step ? "active" : (i < state.step ? "done" : "");
+      return '<div class="adn-stepper-dot ' + cls + '"></div>';
+    }).join("");
+
+    let body = "";
+    if (state.step === 0) body = renderHome();
+    else if (state.step === 1) body = renderDatos();
+    else if (state.step === 2) body = renderChecklist();
+    else if (state.step === 3) body = renderActa();
+    else if (state.step === 4) body = renderExport();
+
+    root.innerHTML =
+      '<div class="adn-shell">' +
+        '<div class="adn-header">' +
+          '<img src="' + LOGO_ADN + '" alt="ADN Developers" class="adn-logo-img"/>' +
+          '<div class="adn-stepper">' + stepDots + '</div>' +
+        '</div>' +
+        '<div class="adn-body">' + body + '</div>' +
+        '<div class="adn-status"><span class="dot"></span>' + (state.step === 0 ? 'Listo' : 'Guardado automático activo') + '<span style="margin: 0 8px; color: var(--border-2)">·</span><span class="dome-mark">DOME</span></div>' +
+      '</div>';
+
+    document.querySelectorAll('.adn-modal-back, .adn-photo-modal').forEach(n => n.remove());
+    if (state.confirmModal) document.body.appendChild(makeNode(renderConfirmModal()));
+    if (state.photoModal) document.body.appendChild(makeNode('<div class="adn-photo-modal" data-action="close-photo-modal"><button class="adn-photo-modal-close" data-action="close-photo-modal"><i class="ti ti-x"></i></button><img src="' + state.photoModal + '" alt="foto"/></div>'));
+
+    attachHandlers();
+    if (state.step === 3) requestAnimationFrame(attachSignaturePads);
+
+    renderToast();
+    // Restaurar scroll si veníamos del mismo step; si cambió de step, ir arriba.
+    if (render._lastStep === state.step && render._savedScroll != null) {
+      window.scrollTo({ top: render._savedScroll, behavior: 'instant' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    render._lastStep = state.step;
+    render._savedScroll = null;
+  }
+
+  // Wrapper: guarda scroll antes de cualquier render que no sea cambio de step
+  function renderPreserveScroll() {
+    render._savedScroll = window.scrollY || window.pageYOffset || 0;
+    render();
+  }
+
+  function makeNode(html) {
+    const t = document.createElement('template');
+    t.innerHTML = html.trim();
+    return t.content.firstChild;
+  }
+
+  // ===== Step 0: Home =====
+  function renderHome() {
+    const all = getAllEdificios();
+    return ''
+      + '<div class="adn-home-hero">'
+        + '<div class="dome-tag">DOME</div>'
+        + '<h1 class="adn-h1">Actas de posesión</h1>'
+        + '<p class="adn-sub" style="text-align:center;margin-bottom:0">Entrega digital de unidades funcionales</p>'
+      + '</div>'
+      + '<div style="margin: 0 0 12px">'
+        + '<button class="adn-btn adn-btn-primary" data-action="nueva-entrega"><i class="ti ti-key"></i> Nueva entrega</button>'
+      + '</div>'
+      + '<button class="adn-btn adn-btn-ghost" data-action="agregar-edificio"><i class="ti ti-building-plus"></i> Agregar edificio</button>'
+      + '<div style="margin-top: 28px">'
+        + '<p class="adn-section-title" style="margin-bottom:10px">Edificios disponibles (' + all.length + ')</p>'
+        + all.map(e => renderEdificioCard(e, false)).join("")
+      + '</div>';
+  }
+
+  function renderEdificioCard(e, selectable) {
+    const isLocked = e.locked === true;
+    return '<div class="adn-card-edificio' + (selectable && String(state.selectedEdificioId) === String(e.id) ? ' selected' : '') + '"'
+      + (selectable ? ' data-action="select-edif" data-id="' + e.id + '"' : '') + '>'
+      + '<div class="adn-card-edificio-info">'
+        + '<p class="adn-card-edificio-name">'
+          + (e.isDome ? '<span class="dome-pre">DOME</span>' : '')
+          + escapeHtml(e.isDome ? e.nombre.replace(/^DOME\s+/i, '') : e.nombre)
+          + (isLocked ? ' <i class="ti ti-lock lock-icon" title="Edificio precargado"></i>' : '')
+        + '</p>'
+        + '<p class="adn-card-edificio-addr"><i class="ti ti-map-pin"></i>' + escapeHtml(e.direccion) + '</p>'
+      + '</div>'
+      + (selectable && String(state.selectedEdificioId) === String(e.id) ? '<i class="ti ti-check" style="color:#fff;font-size:22px;flex-shrink:0"></i>' : '')
+      + (!selectable && !isLocked ? '<button class="adn-btn adn-btn-icon" data-action="del-edificio" data-id="' + e.id + '" style="width:auto;min-height:auto;padding:8px 10px;flex-shrink:0"><i class="ti ti-trash" style="color:#d87878"></i></button>' : '')
+    + '</div>';
+  }
+
+  // ===== Step 1: Datos =====
+  function renderDatos() {
+    const ed = state.entrega;
+    if (!ed.fechaHora) ed.fechaHora = new Date().toISOString();
+    const all = getAllEdificios();
+
+    return ''
+      + '<h1 class="adn-h1">Datos de la entrega</h1>'
+      + '<p class="adn-sub">Paso 1 de 3</p>'
+
+      + '<div class="adn-section">'
+        + '<p class="adn-section-title">Edificio<span style="color:var(--text)"> *</span></p>'
+        + all.map(e => renderEdificioCard(e, true)).join("")
+        + '<div class="adn-add-link" data-action="agregar-edificio"><i class="ti ti-plus"></i> Agregar nuevo edificio</div>'
+      + '</div>'
+
+      + '<div class="adn-section">'
+        + '<p class="adn-section-title">Datos de la unidad</p>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">Unidad funcional<span class="req">*</span></label>'
+          + '<input type="text" class="adn-input" data-field="unidad" value="' + escapeHtml(ed.unidad) + '" placeholder="Ej: UF 12"/>'
+        + '</div>'
+        + '<div class="adn-field" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'
+          + '<div>'
+            + '<label class="adn-label">Piso</label>'
+            + '<input type="text" class="adn-input" data-field="piso" value="' + escapeHtml(ed.piso) + '" placeholder="Ej: 4"/>'
+          + '</div>'
+          + '<div>'
+            + '<label class="adn-label">Número / depto</label>'
+            + '<input type="text" class="adn-input" data-field="numero" value="' + escapeHtml(ed.numero) + '" placeholder="Ej: B"/>'
+          + '</div>'
+        + '</div>'
+      + '</div>'
+
+      + '<div class="adn-section">'
+        + '<p class="adn-section-title">Fecha y hora</p>'
+        + '<input type="text" class="adn-input" readonly value="' + fmtFechaHora(ed.fechaHora) + '"/>'
+        + '<p style="margin:6px 0 0;font-size:11px;color:var(--text-3)"><i class="ti ti-clock"></i> Capturado automáticamente del sistema</p>'
+      + '</div>'
+
+      + '<div class="adn-section">'
+        + '<p class="adn-section-title">Quién entrega</p>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">Nombre y apellido<span class="req">*</span></label>'
+          + '<input type="text" class="adn-input" data-field="entrega.nombre" value="' + escapeHtml(ed.entrega.nombre) + '" placeholder="Nombre completo"/>'
+        + '</div>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">DNI<span class="req">*</span></label>'
+          + '<input type="text" inputmode="numeric" class="adn-input" data-field="entrega.dni" value="' + escapeHtml(ed.entrega.dni) + '" placeholder="00.000.000"/>'
+        + '</div>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">Rol</label>'
+          + '<select class="adn-select" data-field="entrega.rol">'
+            + ["Comercial ADN", "Postventa ADN", "Supervisor ADN"].map(r =>
+                '<option value="' + r + '"' + (ed.entrega.rol === r ? ' selected' : '') + '>' + r + '</option>'
+              ).join("")
+          + '</select>'
+          + '<div class="adn-role-pill"><i class="ti ti-id-badge-2"></i> ' + escapeHtml(ed.entrega.rol) + '</div>'
+        + '</div>'
+      + '</div>'
+
+      + '<div class="adn-section">'
+        + '<p class="adn-section-title">Quién recibe</p>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">Nombre y apellido<span class="req">*</span></label>'
+          + '<input type="text" class="adn-input" data-field="recibe.nombre" value="' + escapeHtml(ed.recibe.nombre) + '" placeholder="Nombre completo"/>'
+        + '</div>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">DNI<span class="req">*</span></label>'
+          + '<input type="text" inputmode="numeric" class="adn-input" data-field="recibe.dni" value="' + escapeHtml(ed.recibe.dni) + '" placeholder="00.000.000"/>'
+        + '</div>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">Celular</label>'
+          + '<input type="tel" inputmode="tel" class="adn-input" data-field="recibe.celular" value="' + escapeHtml(ed.recibe.celular) + '" placeholder="+54 9 11 ..."/>'
+        + '</div>'
+        + '<div class="adn-field">'
+          + '<label class="adn-label">Correo electrónico</label>'
+          + '<input type="email" inputmode="email" class="adn-input" data-field="recibe.email" value="' + escapeHtml(ed.recibe.email) + '" placeholder="email@ejemplo.com"/>'
+        + '</div>'
+      + '</div>'
+
+      + '<div class="adn-nav">'
+        + '<button class="adn-btn adn-btn-ghost" data-action="back-home"><i class="ti ti-arrow-left"></i> Volver</button>'
+        + '<button class="adn-btn adn-btn-primary" data-action="goto-checklist">Continuar <i class="ti ti-arrow-right"></i></button>'
+      + '</div>';
+  }
+
+  // ===== Step 2: Checklist =====
+  function renderChecklist() {
+    const items = state.entrega.checklist;
+    const done = items.filter(i => i.estado).length;
+    const pct = Math.round((done / items.length) * 100);
+
+    return ''
+      + '<h1 class="adn-h1">Checklist de entrega</h1>'
+      + '<p class="adn-sub">Paso 2 de 3 · <span id="progress-text">' + done + ' / ' + items.length + ' ítems evaluados</span> · evaluación opcional</p>'
+      + '<div class="adn-progress-bar"><div class="adn-progress-bar-fill" id="progress-bar-fill" style="width:' + pct + '%"></div></div>'
+      + '<div id="checklist-list">'
+        + items.map((it, idx) => renderChecklistItem(it, idx)).join("")
+      + '</div>'
+
+      + '<div class="adn-section" style="margin-top:20px">'
+        + '<p class="adn-section-title">Notas adicionales</p>'
+        + '<textarea class="adn-textarea" data-field="notas.texto" placeholder="Observaciones generales, comentarios libres...">' + escapeHtml(state.entrega.notas.texto) + '</textarea>'
+        + '<div id="notas-photo-row">' + renderPhotoRow(state.entrega.notas.fotos, "notas", null, true) + '</div>'
+      + '</div>'
+
+      + '<div class="adn-nav">'
+        + '<button class="adn-btn adn-btn-ghost" data-action="back-datos"><i class="ti ti-arrow-left"></i> Volver</button>'
+        + '<button class="adn-btn adn-btn-primary" data-action="goto-acta">Generar acta <i class="ti ti-arrow-right"></i></button>'
+      + '</div>';
+  }
+
+  function renderChecklistItem(it, idx) {
+    const stateCls = it.estado ? 's-' + it.estado : 's-pendiente';
+    const showDetail = it.estado === 'observacion' || it.estado === 'conforme';
+    return '<div class="adn-checklist-item ' + stateCls + '" id="item-' + idx + '" data-item-idx="' + idx + '">'
+      + '<p class="adn-checklist-text"><span class="adn-checklist-num">' + (idx + 1) + '.</span>' + escapeHtml(it.text) + '</p>'
+      + '<div class="adn-checklist-states">'
+        + '<button class="adn-state-btn' + (it.estado === 'conforme' ? ' active-conforme' : '') + '" data-action="set-estado" data-idx="' + idx + '" data-estado="conforme"><i class="ti ti-check"></i> Conforme</button>'
+        + '<button class="adn-state-btn' + (it.estado === 'observacion' ? ' active-observacion' : '') + '" data-action="set-estado" data-idx="' + idx + '" data-estado="observacion"><i class="ti ti-alert-triangle"></i> Observación</button>'
+      + '</div>'
+      + '<div class="item-detail-wrap">' + (showDetail ? renderItemDetail(it, idx) : '') + '</div>'
+    + '</div>';
+  }
+
+  function renderItemDetail(it, idx) {
+    const needsObs = it.estado === 'observacion';
+    return '<div class="adn-detail-box">'
+      + (needsObs
+          ? '<label class="adn-label">Observación<span class="req">*</span></label>'
+            + '<textarea class="adn-textarea" data-field="checklist.' + idx + '.observacion" placeholder="Describí la observación...">' + escapeHtml(it.observacion) + '</textarea>'
+          : '')
+      + renderPhotoRow(it.fotos, "item", idx, true)
+    + '</div>';
+  }
+
+  function renderPhotoRow(fotos, ctx, idx, allowAdd) {
+    const thumbs = fotos.map((f, fi) => ''
+      + '<div class="adn-photo-wrap">'
+        + '<img class="adn-photo-thumb" src="' + f.data + '" data-action="view-photo" data-src="' + f.data + '"/>'
+        + '<button class="adn-photo-del" data-action="del-photo" data-ctx="' + ctx + '" data-idx="' + (idx == null ? '' : idx) + '" data-fi="' + fi + '"><i class="ti ti-x"></i></button>'
+      + '</div>'
+    ).join("");
+    const adder = allowAdd
+      ? '<label class="adn-photo-add"><i class="ti ti-camera"></i><span>Foto</span><input type="file" accept="image/*" capture="environment" multiple data-action="add-photo" data-ctx="' + ctx + '" data-idx="' + (idx == null ? '' : idx) + '"/></label>'
+      : '';
+    return '<div class="adn-photo-row">' + thumbs + adder + '</div>';
+  }
+
+  // ===== Updates locales (sin re-render completo) =====
+  function updateChecklistItem(idx) {
+    const el = document.getElementById('item-' + idx);
+    if (!el) return;
+    const it = state.entrega.checklist[idx];
+    const stateCls = it.estado ? 's-' + it.estado : 's-pendiente';
+    el.className = 'adn-checklist-item ' + stateCls;
+
+    // botones de estado
+    const stateBtns = el.querySelectorAll('.adn-state-btn');
+    stateBtns.forEach(btn => {
+      const e = btn.dataset.estado;
+      btn.className = 'adn-state-btn' + (it.estado === e ? ' active-' + e : '');
+    });
+
+    // detail box
+    const showDetail = it.estado === 'observacion' || it.estado === 'conforme';
+    const wrap = el.querySelector('.item-detail-wrap');
+    wrap.innerHTML = showDetail ? renderItemDetail(it, idx) : '';
+    // re-attach handlers solo dentro de este item
+    attachHandlersIn(el);
+  }
+
+  function updateProgressBar() {
+    const items = state.entrega.checklist;
+    const done = items.filter(i => i.estado).length;
+    const pct = Math.round((done / items.length) * 100);
+    const txt = document.getElementById('progress-text');
+    const fill = document.getElementById('progress-bar-fill');
+    if (txt) txt.textContent = done + ' / ' + items.length + ' ítems evaluados';
+    if (fill) fill.style.width = pct + '%';
+  }
+
+  function updatePhotoRow(ctx, idx) {
+    if (ctx === 'item') {
+      const el = document.getElementById('item-' + idx);
+      if (!el) return;
+      const wrap = el.querySelector('.item-detail-wrap');
+      if (wrap) {
+        wrap.innerHTML = renderItemDetail(state.entrega.checklist[idx], idx);
+        attachHandlersIn(el);
+      }
+    } else if (ctx === 'notas') {
+      const wrap = document.getElementById('notas-photo-row');
+      if (wrap) {
+        wrap.innerHTML = renderPhotoRow(state.entrega.notas.fotos, "notas", null, true);
+        attachHandlersIn(wrap);
+      }
+    }
+  }
+
+  // ===== Step 3: Acta =====
+  function renderActa() {
+    const ed = getEdificio();
+    const e = state.entrega;
+    const s = getEstadoSummary();
+
+    return ''
+      + '<h1 class="adn-h1">Acta de posesión</h1>'
+      + '<p class="adn-sub">Paso 3 de 3 · Revisá los datos y firmá</p>'
+
+      + '<div class="adn-acta-doc">'
+        + '<div class="acta-h">'
+          + '<div class="acta-adn-tag">ADN <span class="sub">DEVELOPERS</span></div>'
+          + '<div class="acta-title">ACTA DE POSESIÓN</div>'
+        + '</div>'
+        + '<h4>UNIDAD</h4>'
+        + '<div class="acta-kv"><span>Edificio</span><span>' + escapeHtml(ed ? ed.nombre : '—') + '</span></div>'
+        + '<div class="acta-kv"><span>Dirección</span><span>' + escapeHtml(ed ? ed.direccion : '—') + '</span></div>'
+        + '<div class="acta-kv"><span>Unidad funcional</span><span>' + escapeHtml(e.unidad || '—') + '</span></div>'
+        + '<div class="acta-kv"><span>Piso</span><span>' + escapeHtml(e.piso || '—') + '</span></div>'
+        + '<div class="acta-kv"><span>Número</span><span>' + escapeHtml(e.numero || '—') + '</span></div>'
+        + '<div class="acta-kv"><span>Fecha y hora</span><span>' + fmtFechaHora(e.fechaHora) + '</span></div>'
+
+        + '<h4>ENTREGA</h4>'
+        + '<div class="acta-kv"><span>Nombre</span><span>' + escapeHtml(e.entrega.nombre) + '</span></div>'
+        + '<div class="acta-kv"><span>DNI</span><span>' + escapeHtml(e.entrega.dni) + '</span></div>'
+        + '<div class="acta-kv"><span>Rol</span><span>' + escapeHtml(e.entrega.rol) + '</span></div>'
+
+        + '<h4>RECIBE</h4>'
+        + '<div class="acta-kv"><span>Nombre</span><span>' + escapeHtml(e.recibe.nombre) + '</span></div>'
+        + '<div class="acta-kv"><span>DNI</span><span>' + escapeHtml(e.recibe.dni) + '</span></div>'
+        + (e.recibe.celular ? '<div class="acta-kv"><span>Celular</span><span>' + escapeHtml(e.recibe.celular) + '</span></div>' : '')
+        + (e.recibe.email ? '<div class="acta-kv"><span>Email</span><span>' + escapeHtml(e.recibe.email) + '</span></div>' : '')
+
+        + '<div class="acta-decl">EL COMPRADOR PRESTA EXPRESA CONFORMIDAD CON LOS SIGUIENTES PUNTOS</div>'
+        + '<div class="acta-stats">'
+          + '<div class="acta-stat conf"><div class="acta-stat-num">' + s.conf + '</div><div class="acta-stat-label">CONFORMES</div></div>'
+          + '<div class="acta-stat obs"><div class="acta-stat-num">' + s.obs + '</div><div class="acta-stat-label">OBSERV.</div></div>'
+          + '<div class="acta-stat se"><div class="acta-stat-num">' + s.sinEval + '</div><div class="acta-stat-label">SIN EVAL.</div></div>'
+        + '</div>'
+
+        + '<h4>DETALLE</h4>'
+        + e.checklist.map((it, i) => ''
+          + '<div class="acta-item">'
+            + '<div class="acta-item-text">' + (i + 1) + '. ' + escapeHtml(it.text) + '</div>'
+            + '<div class="acta-item-state ' + (it.estado ? 's-' + it.estado + '-c' : 's-sin-evaluar-c') + '">' + (it.estado ? it.estado.toUpperCase().replace('-', ' ') : '/') + '</div>'
+            + (it.observacion ? '<div class="acta-item-obs">Obs: ' + escapeHtml(it.observacion) + '</div>' : '')
+          + '</div>'
+        ).join("")
+        + (e.notas.texto ? '<h4>NOTAS ADICIONALES</h4><div class="acta-item-obs" style="font-style:normal;color:#0a0a0a">' + escapeHtml(e.notas.texto) + '</div>' : '')
+
+        + '<div class="acta-foot">'
+          + '<div class="acta-foot-dome">DOME</div>'
+          + '<div class="acta-foot-sub">ADN DEVELOPERS</div>'
+        + '</div>'
+      + '</div>'
+
+      + '<div class="adn-section">'
+        + '<p class="adn-section-title">Firmas</p>'
+        + '<div class="adn-sign-label"><span>Representante ADN Developers</span>' + (e.firmaEntrega ? '<span class="badge-ok"><i class="ti ti-check"></i> Firmado</span>' : '<span class="badge-pend">Pendiente</span>') + '</div>'
+        + '<canvas class="adn-signature-box" id="sign-entrega"></canvas>'
+        + '<div class="adn-sign-actions"><button data-action="clear-sign" data-target="entrega"><i class="ti ti-eraser"></i> Limpiar</button></div>'
+
+        + '<div class="adn-sign-label"><span>Comprador</span>' + (e.firmaRecibe ? '<span class="badge-ok"><i class="ti ti-check"></i> Firmado</span>' : '<span class="badge-pend">Pendiente</span>') + '</div>'
+        + '<canvas class="adn-signature-box" id="sign-recibe"></canvas>'
+        + '<div class="adn-sign-actions"><button data-action="clear-sign" data-target="recibe"><i class="ti ti-eraser"></i> Limpiar</button></div>'
+      + '</div>'
+
+      + '<div class="adn-nav">'
+        + '<button class="adn-btn adn-btn-ghost" data-action="back-checklist"><i class="ti ti-arrow-left"></i> Volver</button>'
+        + '<button class="adn-btn adn-btn-primary" data-action="finalizar"><i class="ti ti-check"></i> Finalizar</button>'
+      + '</div>';
+  }
+
+  // ===== Step 4: Export =====
+  function renderExport() {
+    const ed = getEdificio();
+    const e = state.entrega;
+    return ''
+      + '<div style="text-align:center;margin:40px 0 28px">'
+        + '<div class="adn-success-circle"><i class="ti ti-check"></i></div>'
+        + '<h1 class="adn-h1">Acta finalizada</h1>'
+        + '<p class="adn-sub">' + escapeHtml((ed ? ed.nombre : '') + ' · ' + e.unidad) + '</p>'
+      + '</div>'
+      + '<div class="adn-export-grid">'
+        + '<button class="adn-btn adn-btn-primary" data-action="generar-pdf"><i class="ti ti-file-type-pdf"></i> Generar PDF</button>'
+        + '<button class="adn-btn" data-action="enviar-mail"><i class="ti ti-mail"></i> Enviar por mail</button>'
+        + '<button class="adn-btn" data-action="enviar-wsp"><i class="ti ti-brand-whatsapp"></i> Enviar por WhatsApp</button>'
+        + '<button class="adn-btn" data-action="descargar-zip"><i class="ti ti-file-zip"></i> Descargar ZIP backup</button>'
+        + '<div style="height:1px;background:var(--border);margin:8px 0"></div>'
+        + '<button class="adn-btn adn-btn-ghost" data-action="nueva-entrega-confirm"><i class="ti ti-refresh"></i> Nueva entrega</button>'
+      + '</div>';
+  }
+
+  function renderConfirmModal() {
+    const m = state.confirmModal;
+    return '<div class="adn-modal-back" data-action="modal-backdrop">'
+      + '<div class="adn-modal">'
+        + '<h2 class="adn-h2" style="margin-bottom:8px">' + escapeHtml(m.title) + '</h2>'
+        + '<p class="adn-sub" style="margin-bottom:16px">' + escapeHtml(m.message) + '</p>'
+        + (m.fields ? m.fields : '')
+        + '<div style="display:flex;gap:8px;margin-top:8px">'
+          + '<button class="adn-btn adn-btn-ghost" data-action="modal-cancel">Cancelar</button>'
+          + '<button class="adn-btn adn-btn-primary" data-action="modal-confirm">' + escapeHtml(m.confirm || 'Confirmar') + '</button>'
+        + '</div>'
+      + '</div>'
+    + '</div>';
+  }
+
+  function openAddEdificioModal() {
+    state.confirmModal = {
+      title: "Agregar edificio",
+      message: "Completá los datos del edificio.",
+      fields: ''
+        + '<div class="adn-field"><label class="adn-label">Nombre<span class="req">*</span></label><input type="text" class="adn-input" id="m-edif-nombre" placeholder="Ej: Torre Palermo"/></div>'
+        + '<div class="adn-field"><label class="adn-label">Dirección<span class="req">*</span></label><input type="text" class="adn-input" id="m-edif-dir" placeholder="Calle y número"/></div>',
+      confirm: "Agregar",
+      onConfirm: () => {
+        const nombre = document.getElementById("m-edif-nombre").value.trim();
+        const dir = document.getElementById("m-edif-dir").value.trim();
+        if (!nombre || !dir) { showToast("Completá nombre y dirección"); return false; }
+        state.edificiosCustom.push({ id: Date.now(), nombre, direccion: dir, locked: false, isDome: false });
+        saveEdificios();
+        showToast("Edificio agregado");
+        return true;
+      }
+    };
+    renderPreserveScroll();
+    setTimeout(() => { const i = document.getElementById('m-edif-nombre'); if (i) i.focus(); }, 100);
+  }
+
+  // ===== Validaciones =====
+  function validateDatos() {
+    const e = state.entrega;
+    if (!state.selectedEdificioId) { showToast("Seleccioná un edificio"); return false; }
+    if (!e.unidad.trim()) { showToast("Falta unidad funcional"); return false; }
+    if (!e.entrega.nombre.trim() || !e.entrega.dni.trim()) { showToast("Falta nombre o DNI de quien entrega"); return false; }
+    if (!e.recibe.nombre.trim() || !e.recibe.dni.trim()) { showToast("Falta nombre o DNI de quien recibe"); return false; }
+    return true;
+  }
+
+  // Validación checklist: SOLO observaciones obligatorias en items marcados, no obliga a evaluar todos
+  function validateChecklist() {
+    const e = state.entrega;
+    for (let i = 0; i < e.checklist.length; i++) {
+      const it = e.checklist[i];
+      if (it.estado === 'observacion' && !it.observacion.trim()) {
+        showToast("Observación requerida en ítem " + (i+1));
+        const el = document.getElementById('item-' + i);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // ===== Signature pads =====
+  let signPads = { entrega: null, recibe: null };
+  function attachSignaturePads() {
+    if (typeof SignaturePad === 'undefined') return;
+    ['entrega', 'recibe'].forEach(t => {
+      const c = document.getElementById('sign-' + t);
+      if (!c) return;
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      c.width = c.offsetWidth * ratio;
+      c.height = c.offsetHeight * ratio;
+      c.getContext("2d").scale(ratio, ratio);
+      const pad = new SignaturePad(c, {
+        backgroundColor: 'rgb(255,255,255)',
+        penColor: 'rgb(10,10,10)',
+        minWidth: 0.8,
+        maxWidth: 2.4
+      });
+      const key = 'firma' + t.charAt(0).toUpperCase() + t.slice(1);
+      const data = state.entrega[key];
+      if (data) { try { pad.fromDataURL(data); } catch(e) {} }
+      pad.addEventListener("endStroke", () => {
+        state.entrega[key] = pad.toDataURL("image/png");
+        saveDraft();
+      });
+      signPads[t] = pad;
+    });
+  }
+
+  // ===== File handling =====
+  function readFileAsDataURL(file) {
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+  }
+  function resizeImage(dataUrl, maxDim = 1280, quality = 0.78) {
+    return new Promise((res) => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > h && w > maxDim) { h = h * maxDim / w; w = maxDim; }
+        else if (h > maxDim) { w = w * maxDim / h; h = maxDim; }
+        const c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        res(c.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = () => res(dataUrl);
+      img.src = dataUrl;
+    });
+  }
+
+  // ===== PDF =====
+  async function generarPDFBlob() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const W = 210, H = 297, M = 15;
+    let y = M;
+    const ed = getEdificio();
+    const e = state.entrega;
+    const s = getEstadoSummary();
+
+    // Header negro con logo ADN
+    doc.setFillColor(0, 0, 0);
+    doc.rect(0, 0, W, 32, 'F');
+    try {
+      // Logo ADN — 35mm de ancho, mantiene proporción
+      doc.addImage(LOGO_ADN, 'PNG', M, 7, 32, 18);
+    } catch(err) { console.warn(err); }
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("ACTA DE POSESIÓN", W - M, 17, { align: 'right' });
+    doc.setFontSize(8);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(180, 180, 180);
+    doc.text(fmtFechaHora(e.fechaHora), W - M, 24, { align: 'right' });
+    y = 42;
+
+    // UNIDAD
+    doc.setTextColor(20, 20, 20);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.text("UNIDAD", M, y); y += 5;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    const ufRows = [
+      ["Edificio", ed ? ed.nombre : "—"],
+      ["Dirección", ed ? ed.direccion : "—"],
+      ["Unidad funcional", e.unidad || "—"],
+      ["Piso", e.piso || "—"],
+      ["Número", e.numero || "—"]
+    ];
+    ufRows.forEach(r => {
+      doc.setTextColor(117, 117, 117);
+      doc.text(r[0], M, y);
+      doc.setTextColor(20, 20, 20);
+      doc.text(String(r[1]), M + 50, y);
+      y += 5;
+    });
+    y += 4;
+
+    // Entrega / Recibe
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9);
+    doc.text("ENTREGA", M, y);
+    doc.text("RECIBE", W/2, y); y += 5;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    const pairs = [
+      ["Nombre", e.entrega.nombre, "Nombre", e.recibe.nombre],
+      ["DNI", e.entrega.dni, "DNI", e.recibe.dni],
+      ["Rol", e.entrega.rol, "Celular", e.recibe.celular || "—"],
+      ["", "", "Email", e.recibe.email || "—"]
+    ];
+    pairs.forEach(p => {
+      if (p[0]) { doc.setTextColor(117,117,117); doc.text(p[0], M, y); doc.setTextColor(20,20,20); doc.text(String(p[1] || ""), M+22, y); }
+      doc.setTextColor(117,117,117); doc.text(p[2], W/2, y);
+      doc.setTextColor(20,20,20); doc.text(String(p[3] || "").substring(0, 40), W/2+22, y);
+      y += 5;
+    });
+    y += 4;
+
+    // Declaración
+    doc.setFillColor(245, 245, 245);
+    doc.setDrawColor(10, 10, 10);
+    doc.setLineWidth(0.3);
+    doc.rect(M, y, W-2*M, 11, 'FD');
+    // Borde izquierdo grueso
+    doc.setFillColor(10, 10, 10);
+    doc.rect(M, y, 1.5, 11, 'F');
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(20,20,20);
+    doc.text("EL COMPRADOR PRESTA EXPRESA CONFORMIDAD CON LOS SIGUIENTES PUNTOS", W/2, y+7, { align: 'center' });
+    y += 16;
+
+    // Stats - 3 columnas
+    const tileW = (W-2*M-6)/3;
+    const tiles = [
+      [s.conf, "CONFORMES", [74,122,42], [235,242,225]],
+      [s.obs, "OBSERVACIONES", [138,120,56], [245,236,216]],
+      [s.sinEval, "SIN EVALUAR", [102,102,102], [237,237,237]]
+    ];
+    tiles.forEach((t, i) => {
+      const x = M + i*(tileW+3);
+      doc.setFillColor(t[3][0], t[3][1], t[3][2]);
+      doc.rect(x, y, tileW, 14, 'F');
+      doc.setTextColor(t[2][0], t[2][1], t[2][2]);
+      doc.setFontSize(15); doc.setFont("helvetica","bold");
+      doc.text(String(t[0]), x+tileW/2, y+8, { align: 'center' });
+      doc.setFontSize(7);
+      doc.text(t[1], x+tileW/2, y+12, { align: 'center' });
+    });
+    y += 20;
+
+    // Detalle
+    doc.setFont("helvetica","bold"); doc.setFontSize(9); doc.setTextColor(20,20,20);
+    doc.text("DETALLE DE ÍTEMS", M, y); y += 5;
+    doc.setFontSize(9); doc.setFont("helvetica","normal");
+
+    e.checklist.forEach((it, i) => {
+      if (y > 265) { doc.addPage(); y = M; }
+      const stateColor = it.estado === 'conforme' ? [74,122,42]
+        : it.estado === 'observacion' ? [138,120,56]
+        : [136,136,136];
+      doc.setFillColor(stateColor[0], stateColor[1], stateColor[2]);
+      doc.rect(M, y, 1.5, 7, 'F');
+      doc.setTextColor(20,20,20);
+      const text = (i+1) + ". " + it.text;
+      const lines = doc.splitTextToSize(text, W-2*M-32);
+      doc.text(lines, M+4, y+3.5);
+      const stateLabel = it.estado ? it.estado.toUpperCase().replace('-',' ') : "/";
+      doc.setTextColor(stateColor[0], stateColor[1], stateColor[2]);
+      doc.setFont("helvetica","bold"); doc.setFontSize(7);
+      doc.text(stateLabel, W-M, y+3.5, { align: 'right' });
+      doc.setFont("helvetica","normal"); doc.setFontSize(9);
+      y += Math.max(7, lines.length * 3.8);
+      if (it.observacion) {
+        doc.setTextColor(80,80,80); doc.setFontSize(8);
+        const obsLines = doc.splitTextToSize("Obs: " + it.observacion, W-2*M-4);
+        doc.text(obsLines, M+4, y);
+        y += obsLines.length * 3.5 + 1;
+        doc.setFontSize(9);
+      }
+      if (it.fotos.length > 0) {
+        doc.setTextColor(117,117,117); doc.setFontSize(7);
+        doc.text("[" + it.fotos.length + " foto(s) — ver anexo]", M+4, y);
+        doc.setFontSize(9);
+        y += 3.5;
+      }
+      y += 2;
+    });
+
+    // Notas
+    if (e.notas.texto) {
+      if (y > 250) { doc.addPage(); y = M; }
+      doc.setFont("helvetica","bold"); doc.setFontSize(9); doc.setTextColor(20,20,20);
+      y += 4;
+      doc.text("NOTAS ADICIONALES", M, y); y += 5;
+      doc.setFont("helvetica","normal"); doc.setFontSize(9);
+      const nLines = doc.splitTextToSize(e.notas.texto, W-2*M);
+      doc.text(nLines, M, y);
+      y += nLines.length * 4 + 4;
+    }
+
+    // Firmas
+    if (y > 225) { doc.addPage(); y = M; }
+    y += 12;
+    doc.setFontSize(9); doc.setTextColor(20,20,20); doc.setFont("helvetica","bold");
+    doc.text("FIRMAS", M, y); y += 4;
+    const sigW = (W-2*M-10)/2;
+    if (e.firmaEntrega) { try { doc.addImage(e.firmaEntrega, 'PNG', M, y, sigW, 28); } catch(err) {} }
+    if (e.firmaRecibe) { try { doc.addImage(e.firmaRecibe, 'PNG', M+sigW+10, y, sigW, 28); } catch(err) {} }
+    y += 29;
+    doc.setDrawColor(80,80,80);
+    doc.line(M, y, M+sigW, y);
+    doc.line(M+sigW+10, y, M+sigW+sigW+10, y);
+    y += 4;
+    doc.setFont("helvetica","bold"); doc.setFontSize(8);
+    doc.text("Firma representante ADN Developers", M, y);
+    doc.text("Firma comprador", M+sigW+10, y);
+    y += 4;
+    doc.setFont("helvetica","normal"); doc.setFontSize(8);
+    doc.setTextColor(80,80,80);
+    doc.text((e.entrega.nombre || "") + " — DNI " + (e.entrega.dni || ""), M, y);
+    doc.text((e.recibe.nombre || "") + " — DNI " + (e.recibe.dni || ""), M+sigW+10, y);
+
+    // Anexo fotográfico
+    const itemsWithPhotos = e.checklist.filter(it => it.fotos.length > 0);
+    if (itemsWithPhotos.length > 0 || e.notas.fotos.length > 0) {
+      doc.addPage(); y = M;
+      doc.setFillColor(0,0,0); doc.rect(0,0,W,20,'F');
+      try { doc.addImage(LOGO_ADN, 'PNG', M, 4, 24, 13); } catch(err) {}
+      doc.setTextColor(255,255,255); doc.setFontSize(12); doc.setFont("helvetica","bold");
+      doc.text("ANEXO FOTOGRÁFICO", W-M, 13, { align: 'right' });
+      y = 28;
+
+      for (const it of itemsWithPhotos) {
+        const idx = e.checklist.indexOf(it);
+        if (y > 245) { doc.addPage(); y = M; }
+        doc.setTextColor(20,20,20); doc.setFontSize(9); doc.setFont("helvetica","bold");
+        const titleLines = doc.splitTextToSize("Ítem " + (idx+1) + " · " + it.text, W-2*M);
+        doc.text(titleLines, M, y);
+        y += titleLines.length * 4 + 2;
+        for (const foto of it.fotos) {
+          if (y > 220) { doc.addPage(); y = M; }
+          try { doc.addImage(foto.data, 'JPEG', M, y, 80, 60); } catch(err) {}
+          y += 64;
+        }
+        y += 3;
+      }
+      if (e.notas.fotos.length > 0) {
+        if (y > 245) { doc.addPage(); y = M; }
+        doc.setFont("helvetica","bold"); doc.setFontSize(9); doc.setTextColor(20,20,20);
+        doc.text("Notas adicionales", M, y); y += 5;
+        for (const foto of e.notas.fotos) {
+          if (y > 220) { doc.addPage(); y = M; }
+          try { doc.addImage(foto.data, 'JPEG', M, y, 80, 60); } catch(err) {}
+          y += 64;
+        }
+      }
+    }
+
+    // Footer en todas las páginas con DOME
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(7); doc.setTextColor(150,150,150); doc.setFont("helvetica","normal");
+      doc.text("ADN Developers · Acta de posesión", M, H-8);
+      doc.setFont("times", "bold"); doc.setFontSize(8); doc.setTextColor(80,80,80);
+      doc.text("DOME", W/2, H-8, { align: 'center' });
+      doc.setFont("helvetica","normal"); doc.setFontSize(7); doc.setTextColor(150,150,150);
+      doc.text(i + " / " + totalPages, W-M, H-8, { align: 'right' });
+    }
+
+    return doc.output("blob");
+  }
+
+  function pdfFileName(ext = "pdf") {
+    const ed = getEdificio();
+    const e = state.entrega;
+    const safe = s => (s || "").replace(/[^a-z0-9]/gi, "_").substring(0, 25);
+    return "Acta_" + safe(ed ? ed.nombre : "edif") + "_UF" + safe(e.unidad) + "_" + new Date().toISOString().split("T")[0] + "." + ext;
+  }
+
+  function downloadBlob(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+  }
+
+  async function generarPDF() {
+    showToast("Generando PDF...");
+    try {
+      const blob = await generarPDFBlob();
+      downloadBlob(blob, pdfFileName());
+      showToast("PDF descargado");
+    } catch(err) {
+      console.error(err);
+      showToast("Error al generar PDF");
+    }
+  }
+
+  async function descargarZIP() {
+    showToast("Generando ZIP...");
+    try {
+      const zip = new JSZip();
+      const pdfBlob = await generarPDFBlob();
+      zip.file(pdfFileName(), pdfBlob);
+
+      const wb = XLSX.utils.book_new();
+      const e = state.entrega;
+      const ed = getEdificio();
+      const s = getEstadoSummary();
+      const rows = [
+        ["ADN Developers — Acta de posesión"],
+        [],
+        ["Edificio", ed ? ed.nombre : ""],
+        ["Dirección", ed ? ed.direccion : ""],
+        ["Unidad funcional", e.unidad],
+        ["Piso", e.piso],
+        ["Número", e.numero],
+        ["Fecha y hora", fmtFechaHora(e.fechaHora)],
+        [],
+        ["QUIÉN ENTREGA"],
+        ["Nombre", e.entrega.nombre],
+        ["DNI", e.entrega.dni],
+        ["Rol", e.entrega.rol],
+        [],
+        ["QUIÉN RECIBE"],
+        ["Nombre", e.recibe.nombre],
+        ["DNI", e.recibe.dni],
+        ["Celular", e.recibe.celular],
+        ["Email", e.recibe.email],
+        [],
+        ["DETALLE DEL CHECKLIST"],
+        ["#", "Ítem", "Estado", "Observación", "Fotos"]
+      ];
+      e.checklist.forEach((it, i) => {
+        rows.push([i+1, it.text, it.estado || "/", it.observacion || "", it.fotos.length]);
+      });
+      rows.push([]);
+      rows.push(["RESUMEN"]);
+      rows.push(["Conformes", s.conf]);
+      rows.push(["Observaciones", s.obs]);
+      rows.push(["Sin evaluar", s.sinEval]);
+      rows.push([]);
+      rows.push(["Notas adicionales", e.notas.texto]);
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      ws['!cols'] = [{wch:5},{wch:60},{wch:14},{wch:40},{wch:8}];
+      XLSX.utils.book_append_sheet(wb, ws, "Acta");
+      const xlsxBlob = new Blob([XLSX.write(wb, { type: 'array', bookType: 'xlsx' })], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      });
+      zip.file("acta_datos.xlsx", xlsxBlob);
+
+      const fotosFolder = zip.folder("fotos");
+      e.checklist.forEach((it, i) => {
+        it.fotos.forEach((f, fi) => {
+          const slug = it.text.toLowerCase()
+            .replace(/[áéíóúñ]/g, m => ({á:'a',é:'e',í:'i',ó:'o',ú:'u',ñ:'n'}[m]))
+            .replace(/[^a-z0-9]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'').substring(0,30);
+          const name = "item_" + String(i+1).padStart(2,'0') + "_" + slug + "_" + (fi+1) + ".jpg";
+          fotosFolder.file(name, f.data.split(",")[1], { base64: true });
+        });
+      });
+      e.notas.fotos.forEach((f, fi) => {
+        fotosFolder.file("notas_" + (fi+1) + ".jpg", f.data.split(",")[1], { base64: true });
+      });
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      downloadBlob(zipBlob, pdfFileName("zip"));
+      showToast("ZIP descargado");
+    } catch(err) {
+      console.error(err);
+      showToast("Error al generar ZIP");
+    }
+  }
+
+  async function enviarMail() {
+    const ed = getEdificio();
+    const e = state.entrega;
+    const to = e.recibe.email || "";
+    const subject = "Acta de posesión — " + (ed ? ed.nombre : "") + " UF " + e.unidad;
+    const body = "Estimado/a " + e.recibe.nombre + ",\n\n"
+      + "Le hacemos llegar el acta de posesión de su unidad.\n\n"
+      + "Edificio: " + (ed ? ed.nombre : "") + "\n"
+      + "Dirección: " + (ed ? ed.direccion : "") + "\n"
+      + "Unidad: " + e.unidad + "\n"
+      + "Fecha de entrega: " + fmtFechaHora(e.fechaHora) + "\n\n"
+      + "Adjuntamos el PDF correspondiente.\n\n"
+      + "Saludos cordiales,\n" + e.entrega.nombre + "\n" + e.entrega.rol + "\nADN Developers";
+
+    showToast("Generando PDF...");
+    try {
+      const blob = await generarPDFBlob();
+      downloadBlob(blob, pdfFileName());
+      showToast("PDF descargado. Abriendo mail...");
+      // pequeño delay para que el toast se vea y el download termine antes de cambiar de ventana
+      setTimeout(() => {
+        window.location.href = "mailto:" + encodeURIComponent(to) + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      }, 800);
+    } catch(err) {
+      console.error(err);
+      showToast("Error al generar PDF");
+    }
+  }
+
+  async function enviarWsp() {
+    const ed = getEdificio();
+    const e = state.entrega;
+    const num = (e.recibe.celular || "").replace(/[^0-9]/g, "");
+    const txt = "Hola " + e.recibe.nombre + ", te enviamos el acta de posesión de tu unidad en "
+      + (ed ? ed.nombre : "") + " (UF " + e.unidad + "). "
+      + "Saludos, ADN Developers.";
+    const url = num
+      ? "https://wa.me/" + num + "?text=" + encodeURIComponent(txt)
+      : "https://wa.me/?text=" + encodeURIComponent(txt);
+
+    showToast("Generando PDF...");
+    try {
+      const blob = await generarPDFBlob();
+      downloadBlob(blob, pdfFileName());
+      showToast("PDF descargado. Abriendo WhatsApp...");
+      setTimeout(() => { window.open(url, "_blank"); }, 800);
+    } catch(err) {
+      console.error(err);
+      showToast("Error al generar PDF");
+    }
+  }
+
+  // ===== Handlers =====
+  function attachHandlersIn(container) {
+    container.querySelectorAll('[data-field]').forEach(bindFieldHandler);
+    container.querySelectorAll('[data-action]').forEach(bindActionHandler);
+  }
+
+  function bindFieldHandler(el) {
+    if (el._adn_bound) return;
+    el._adn_bound = true;
+    el.addEventListener('input', () => {
+      const path = el.dataset.field.split('.');
+      const v = el.value;
+      if (path[0] === 'checklist') {
+        state.entrega.checklist[parseInt(path[1])][path[2]] = v;
+      } else if (path[0] === 'notas') {
+        state.entrega.notas[path[1]] = v;
+      } else if (path.length === 1) {
+        state.entrega[path[0]] = v;
+      } else {
+        state.entrega[path[0]][path[1]] = v;
+      }
+      saveDraft();
+    });
+    el.addEventListener('change', () => {
+      if (el.dataset.field === 'entrega.rol') renderPreserveScroll();
+    });
+  }
+
+  function bindActionHandler(el) {
+    if (el._adn_bound) return;
+    el._adn_bound = true;
+    const action = el.dataset.action;
+    if (action === 'add-photo') {
+      el.addEventListener('change', async (ev) => {
+        showToast("Procesando foto...");
+        const files = Array.from(ev.target.files || []);
+        for (const f of files) {
+          try {
+            const raw = await readFileAsDataURL(f);
+            const resized = await resizeImage(raw);
+            const ctx = el.dataset.ctx;
+            const idx = el.dataset.idx;
+            if (ctx === 'item') {
+              state.entrega.checklist[parseInt(idx)].fotos.push({ name: f.name, data: resized });
+            } else if (ctx === 'notas') {
+              state.entrega.notas.fotos.push({ name: f.name, data: resized });
+            }
+          } catch(err) { console.error(err); }
+        }
+        saveDraft();
+        // Update LOCAL — no full render
+        const ctx = el.dataset.ctx;
+        const idx = el.dataset.idx;
+        updatePhotoRow(ctx, idx ? parseInt(idx) : null);
+        showToast("Foto agregada");
+      });
+      return;
+    }
+    el.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      handleAction(action, el, ev);
+    });
+  }
+
+  function attachHandlers() {
+    const root = document.getElementById("adn-app-root");
+    attachHandlersIn(root);
+
+    document.querySelectorAll('.adn-modal-back [data-action], .adn-photo-modal').forEach(el => {
+      if (el._adn_bound_modal) return;
+      el._adn_bound_modal = true;
+      el.addEventListener('click', (ev) => {
+        const target = ev.target.closest('[data-action]');
+        if (!target) return;
+        const action = target.dataset.action;
+        if (action) handleAction(action, target, ev);
+      });
+    });
+  }
+
+  function handleAction(action, el, ev) {
+    if (action === 'nueva-entrega') {
+      state.step = 1;
+      state.entrega.fechaHora = new Date().toISOString();
+      saveDraft(); render();
+    }
+    else if (action === 'agregar-edificio') openAddEdificioModal();
+    else if (action === 'del-edificio') {
+      const id = el.dataset.id;
+      const edif = state.edificiosCustom.find(e => String(e.id) === String(id));
+      if (!edif) return;
+      state.confirmModal = {
+        title: "Eliminar edificio",
+        message: "¿Eliminar \"" + edif.nombre + "\"? Esta acción no se puede deshacer.",
+        confirm: "Eliminar",
+        onConfirm: () => {
+          state.edificiosCustom = state.edificiosCustom.filter(e => String(e.id) !== String(id));
+          if (String(state.selectedEdificioId) === String(id)) state.selectedEdificioId = null;
+          saveEdificios();
+          showToast("Edificio eliminado");
+          return true;
+        }
+      };
+      renderPreserveScroll();
+    }
+    else if (action === 'select-edif') {
+      state.selectedEdificioId = el.dataset.id;
+      saveDraft(); renderPreserveScroll();
+    }
+    else if (action === 'back-home') { state.step = 0; saveDraft(); render(); }
+    else if (action === 'goto-checklist') {
+      if (validateDatos()) { state.step = 2; saveDraft(); render(); }
+    }
+    else if (action === 'back-datos') { state.step = 1; saveDraft(); render(); }
+    else if (action === 'goto-acta') {
+      if (validateChecklist()) { state.step = 3; saveDraft(); render(); }
+    }
+    else if (action === 'back-checklist') { state.step = 2; saveDraft(); render(); }
+    else if (action === 'set-estado') {
+      const idx = parseInt(el.dataset.idx);
+      const newE = el.dataset.estado;
+      const it = state.entrega.checklist[idx];
+      it.estado = it.estado === newE ? null : newE;
+      saveDraft();
+      // UPDATE LOCAL — no full render, no scroll jump
+      updateChecklistItem(idx);
+      updateProgressBar();
+    }
+    else if (action === 'del-photo') {
+      const ctx = el.dataset.ctx;
+      const idx = el.dataset.idx;
+      const fi = parseInt(el.dataset.fi);
+      if (ctx === 'item') state.entrega.checklist[parseInt(idx)].fotos.splice(fi, 1);
+      else if (ctx === 'notas') state.entrega.notas.fotos.splice(fi, 1);
+      saveDraft();
+      // UPDATE LOCAL
+      updatePhotoRow(ctx, idx ? parseInt(idx) : null);
+    }
+    else if (action === 'view-photo') {
+      state.photoModal = el.dataset.src;
+      renderPreserveScroll();
+    }
+    else if (action === 'close-photo-modal') {
+      state.photoModal = null; renderPreserveScroll();
+    }
+    else if (action === 'clear-sign') {
+      const t = el.dataset.target;
+      if (signPads[t]) signPads[t].clear();
+      state.entrega['firma' + t.charAt(0).toUpperCase() + t.slice(1)] = null;
+      saveDraft(); renderPreserveScroll();
+    }
+    else if (action === 'finalizar') {
+      if (signPads.entrega && !signPads.entrega.isEmpty()) {
+        state.entrega.firmaEntrega = signPads.entrega.toDataURL("image/png");
+      }
+      if (signPads.recibe && !signPads.recibe.isEmpty()) {
+        state.entrega.firmaRecibe = signPads.recibe.toDataURL("image/png");
+      }
+      if (!state.entrega.firmaEntrega || !state.entrega.firmaRecibe) {
+        showToast("Faltan firmas. Ambas son obligatorias.");
+        return;
+      }
+      state.step = 4;
+      clearDraft();
+      render();
+    }
+    else if (action === 'generar-pdf') generarPDF();
+    else if (action === 'descargar-zip') descargarZIP();
+    else if (action === 'enviar-mail') enviarMail();
+    else if (action === 'enviar-wsp') enviarWsp();
+    else if (action === 'nueva-entrega-confirm') {
+      state.confirmModal = {
+        title: "Nueva entrega",
+        message: "Se borrarán los datos actuales y empezarás un acta nueva. ¿Confirmás?",
+        confirm: "Nueva entrega",
+        onConfirm: () => {
+          state.entrega = {
+            unidad: "", piso: "", numero: "",
+            fechaHora: "",
+            entrega: { nombre: "", dni: "", rol: "Comercial ADN" },
+            recibe: { nombre: "", dni: "", celular: "", email: "" },
+            checklist: [], notas: { texto: "", fotos: [] },
+            firmaEntrega: null, firmaRecibe: null
+          };
+          initChecklist();
+          state.selectedEdificioId = null;
+          state.step = 0;
+          clearDraft();
+          showToast("Listo para nueva entrega");
+          return true;
+        }
+      };
+      renderPreserveScroll();
+    }
+    else if (action === 'modal-cancel' || action === 'modal-backdrop') {
+      if (action === 'modal-backdrop' && ev.target.closest('.adn-modal')) return;
+      state.confirmModal = null; renderPreserveScroll();
+    }
+    else if (action === 'modal-confirm') {
+      const m = state.confirmModal;
+      const ok = m.onConfirm ? m.onConfirm() : true;
+      if (ok !== false) state.confirmModal = null;
+      renderPreserveScroll();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadInitial);
+  if (document.readyState !== 'loading') loadInitial();
+})();
+</script>
+</body>
+</html>
